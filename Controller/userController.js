@@ -1,9 +1,8 @@
 import validator from "validator";
 import UserModel from "../models/userModel.js";
-
 import jwt from "jsonwebtoken";
-
 import bcrypt from "bcrypt"
+import "dotenv/config"
 
 const addUser = async(req,res)=>{
   try {
@@ -18,7 +17,7 @@ const addUser = async(req,res)=>{
     }
 
     if (password.length < 8) {
-        return res.json({ success: false, message: "Please enter a strong password" });
+        return res.json({ success: false, message: "Please enter more than 8 numbers" });
     }
     const hash = await bcrypt.hash(password, 10);
     const NewUser = await UserModel({
@@ -28,11 +27,12 @@ const addUser = async(req,res)=>{
     })
 
   const user = await NewUser.save()
-
+  const token = jwt.sign({ user: user.email }, process.env.SK);
   res.status(200).json({
     success:true,
     message:"Register successfully",
-    user
+    user,
+    token
   })
   } catch (error) {
     console.log(error);
@@ -55,7 +55,7 @@ const login = async (req, res) => {
         if (!isMatch) {
             return res.json({ success: false, message: "Invalid credentials" });
         }
-        const token = jwt.sign({ user: user.email }, "accjlksfljklg");
+        const token = jwt.sign({ user: user.email }, process.env.SK);
         res.status(200).json({ success: true, message: "Login successfully",isAuthenticated:true,token });
         
     } catch (error) {

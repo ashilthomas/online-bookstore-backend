@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import 'dotenv/config'
 
 export const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://ashilthomas31:3333333310@cluster0.yczpjlo.mongodb.net/online-bookeStore');
+        await mongoose.connect(process.env.DB_URL);
         console.log("DB connected");
     } catch (error) {
         console.error("Error connecting to database:", error);

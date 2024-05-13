@@ -12,27 +12,29 @@ const addCart = async (req, res) => {
 
         for (const item of cart) {
             const existingItem = user.cart.find(
-                cartItem => cartItem.product === item.product
+                cartItem => cartItem.product.toString() === item.product
             );
 
             if (existingItem) {
-               
-                existingItem.quantity += item.quantity;
+                // If the item already exists in the cart, return an error message
+                return res.status(400).json({ error: 'Product already added to cart' });
             } else {
-                
-                user.cart.push(item);
+                // If the item doesn't exist, add it to the cart
+                user.cart.push({
+                    product: item.product,
+                    quantity: item.quantity
+                });
             }
         }
 
-        await user.save();
+        const cartData = await user.save();
 
-        res.json({ message: 'Cart updated successfully', user });
+        res.json({ message: 'Cart updated successfully', cartData });
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
-
 
 
 export { addCart };
