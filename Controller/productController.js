@@ -5,10 +5,11 @@ import fs from "fs";
 // create books
 
 const addBooks = async (req, res) => {
-  const { title, description, price, author, category } = req.body;
+  console.log(req.body);
+  const { name, description, price, author, category } = req.body;
   try {
     const newBooks = new ProductModel({
-      title: title,
+      name: name,
       description: description,
       price: price,
       author: author,
