@@ -1,7 +1,8 @@
 import express from "express"
 import { addBooks, getAllBooks,getBookDetails, pagination, removeBooks, searchBooks,getCategories } from "../Controller/productController.js"
 import { upload } from "../middleware/upload.js"
-import passport from "passport"
+import authenticateUser from "../middleware/userAuth.js"
+
 
 const productRouter = express.Router()
 
@@ -14,4 +15,3 @@ productRouter.get("/categories",getCategories)
 productRouter.post("/removebooks/:id",removeBooks)
 
 export default productRouter
-// passport.authenticate('jwt',{session:false})

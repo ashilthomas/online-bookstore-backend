@@ -29,6 +29,7 @@ const addBooks = async (req, res) => {
 // get all books
 const getAllBooks = async (req, res) => {
   try {
+ 
     const books = await ProductModel.find({});
     if (!books) {
       return res.json({ success: false, message: "NO Books Available" });
@@ -147,7 +148,7 @@ console.log(query);
 
 const pagination = async (req, res) => {
   const page = parseInt(req.query.page) || 2;
-  const limit = parseInt(req.query.limit) || 2;
+  const limit = parseInt(req.query.limit) || 7;
 
   try {
     const totalCount = await ProductModel.countDocuments();

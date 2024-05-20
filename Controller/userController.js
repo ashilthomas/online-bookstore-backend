@@ -3,6 +3,7 @@ import UserModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
 import "dotenv/config"
+import generateToken from "../Utils/generateToken.js";
 
 const addUser = async(req,res)=>{
   try {
@@ -27,8 +28,9 @@ const addUser = async(req,res)=>{
     })
 
   const user = await NewUser.save()
-  const token = jwt.sign({ user: user.email }, process.env.SK);
-  res.status(200).json({
+    const token = generateToken(email)
+    
+  res.status(200).cookie("token",token).json({
     success:true,
     message:"Register successfully",
     user,
@@ -55,9 +57,12 @@ const login = async (req, res) => {
         if (!isMatch) {
             return res.json({ success: false, message: "Invalid credentials" });
         }
-        const token = jwt.sign({ user: user.email }, process.env.SK);
+        const token = generateToken(email)
+      
 
-        res.status(200).json({ success: true, message: "Login successfully",user,token });
+     
+
+        res.status(200).cookie("token",token).json({ success: true, message: "Login successfully",user,token });
         
     } catch (error) {
         console.log(error);
