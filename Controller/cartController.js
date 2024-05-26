@@ -16,7 +16,7 @@ const addCart = async (req, res) => {
     }
 
     const existingProduct = user.cart.find(
-      (item) => String(item.product) === productId
+      (item) => String(item.product) === productId 
     );
 
     if (existingProduct) {
@@ -77,7 +77,9 @@ const updateQuantity = async (req, res) => {
 };
 
 const getAllCartItems = async (req, res) => {
+ 
   const userId = req.user;
+ 
   
   try {
     const user = await UserModel.findOne({ email: userId.data }).populate(
