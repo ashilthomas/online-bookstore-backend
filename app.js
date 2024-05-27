@@ -22,7 +22,7 @@ app.use(
     origin: true,
   })
 );
-app.use(cookieParser());
+
 
 // router
 app.use("/user", userRoute);

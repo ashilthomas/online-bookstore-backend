@@ -18,7 +18,8 @@ const paymentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  user:{type: mongoose.Schema.Types.ObjectId, ref: "user"}
 });
 
 const paymentModel = mongoose.model("Payment", paymentSchema);
-export default paymentModel
+export default paymentModel;

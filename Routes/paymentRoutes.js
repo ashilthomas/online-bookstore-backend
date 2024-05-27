@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import crypto from "crypto";
 import paymentModel from "../models/paymentModel.js";
 import razorpayInstance from "../Config/payment.js"
+import UserModel from "../models/userModel.js";
+import authenticateUser from "../middleware/userAuth.js";
 
 
 dotenv.config();
@@ -37,8 +39,10 @@ paymentRouter.post("/order", (req, res) => {
   }
 });
 
-paymentRouter.post("/verify", async (req, res) => {
-   
+paymentRouter.post("/verify",authenticateUser, async (req, res) => {
+  const userId = req.user;
+   const email = await UserModel.findOne({email:userId.data})
+
 
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature,productId} =
     req.body;
@@ -64,7 +68,8 @@ paymentRouter.post("/verify", async (req, res) => {
         razorpay_order_id,
         razorpay_payment_id,
         razorpay_signature,
-        product:productId
+        product:productId,
+        user:email._id
       });
 
       await payment.save();
