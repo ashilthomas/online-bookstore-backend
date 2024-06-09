@@ -7,6 +7,7 @@ import path from "path";
 import cartRoute from "./Routes/cartRoute.js";
 import cookieParser from "cookie-parser";
 import paymentRouter from "./Routes/paymentRoutes.js";
+import orderRoute from "./Routes/ordersRoutes.js";
 
 const app = express();
 const port = 3003;
@@ -29,6 +30,7 @@ app.use("/user", userRoute);
 app.use("/products", productRouter);
 app.use("/cart", cartRoute);
 app.use("/payment",paymentRouter)
+app.use("/orders",orderRoute)
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);

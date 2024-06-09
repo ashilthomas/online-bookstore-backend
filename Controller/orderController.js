@@ -2,9 +2,15 @@ import paymentModel from "../models/paymentModel.js";
 import UserModel from "../models/userModel.js";
 
 const getallOrders = async (req, res) => {
-  try {
+     
+  console.log("ri");
     const userId = req.user;
+    console.log("hewrhkjweh",userId);
+    
+  try {
+   
 
+    
     // Find the user by email
     const user = await UserModel.findOne({ email: userId.data });
 
@@ -13,9 +19,9 @@ const getallOrders = async (req, res) => {
     }
 
     // Find orders associated with the user's _id
-    const orders = await paymentModel.find({ user: user._id });
+    const orders = await paymentModel.find({ user: user._id }).populate("product")
 
-    console.log(orders);
+    
 
     // Send the orders as a response
     res.status(200).json(orders);
