@@ -1,6 +1,5 @@
 import validator from "validator";
 import UserModel from "../models/userModel.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
 import "dotenv/config"
 import generateToken from "../Utils/generateToken.js";
@@ -21,6 +20,7 @@ const addUser = async(req,res)=>{
         return res.json({ success: false, message: "Please enter more than 8 numbers" });
     }
     const hash = await bcrypt.hash(password, 10);
+
     const NewUser = await UserModel({
         name:name,
         email:email,
