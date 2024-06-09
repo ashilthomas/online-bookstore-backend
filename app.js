@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import { connectDB } from "./Config/db.js";
 import userRoute from "./Routes/userRoute.js";
-import productRoute from "./Routes/ProductRoute.js";
+import productRoute from './Routes/ProductRoute.js';
+
 import path from "path";
 import cartRoute from "./Routes/cartRoute.js";
 import cookieParser from "cookie-parser";

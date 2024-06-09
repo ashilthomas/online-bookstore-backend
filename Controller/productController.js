@@ -1,4 +1,4 @@
-import { log } from "console";
+
 import ProductModel from "../models/productModel.js";
 import fs from "fs";
 
@@ -95,33 +95,7 @@ const getBookDetails = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-// search books with multiple queryes
 
-// const searchBooks = async (req, res) => {
-//   const { title, author, keywords, category } = req.query;
-//   const query = {};
-
-//   if (title) {
-//     query.title = { $regex: new RegExp(title, "i") };
-//   }
-//   if (author) {
-//     query.author = { $regex: new RegExp(author, "i") };
-//   }
-//   if (category) {
-//     query.category = { $regex: new RegExp(category, "i") };
-//   }
-//   if (keywords) {
-//     query.keywords = { $regex: new RegExp(keywords, "i") };
-//   }
-
-//   try {
-//     const books = await ProductModel.find(query);
-//     res.json({ books });
-//   } catch (error) {
-//     console.error("Error searching books:", error);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// };
 const searchBooks = async (req,res)=>{
   
   const query = req.query.query;

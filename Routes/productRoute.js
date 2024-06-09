@@ -1,5 +1,5 @@
 import express from "express"
-import { addBooks, getAllBooks,getBookDetails, pagination, removeBooks, searchBooks,getCategories } from "../Controller/productController.js"
+import { addBooks, getAllBooks,getBookDetails, removeBooks, searchBooks,getCategories } from "../Controller/productController.js"
 import { upload } from "../middleware/upload.js"
 
 
@@ -10,7 +10,7 @@ productRoute.post("/addbooks",upload.single("image"),addBooks)
 productRoute.get("/allbooks",getAllBooks)
 productRoute.get("/bookdetails/:id",getBookDetails)
 productRoute.post("/searchbooks",searchBooks)
-productRoute.get("/pagination",pagination)
+// productRoute.get("/pagination",pagination)
 productRoute.get("/categories",getCategories)
 productRoute.post("/removebooks/:id",removeBooks)
 
