@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import { connectDB } from "./Config/db.js";
 import userRoute from "./Routes/userRoute.js";
-import productRouter from "./Routes/ProductRoute.js";
+import productRoute from "./Routes/ProductRoute.js";
 import path from "path";
 import cartRoute from "./Routes/cartRoute.js";
 import cookieParser from "cookie-parser";
@@ -27,7 +27,7 @@ app.use(
 
 // router
 app.use("/user", userRoute);
-app.use("/products", productRouter);
+app.use("/products", productRoute);
 app.use("/cart", cartRoute);
 app.use("/payment",paymentRouter)
 app.use("/orders",orderRoute)

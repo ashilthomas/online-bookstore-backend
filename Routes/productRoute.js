@@ -1,17 +1,17 @@
 import express from "express"
 import { addBooks, getAllBooks,getBookDetails, pagination, removeBooks, searchBooks,getCategories } from "../Controller/productController.js"
 import { upload } from "../middleware/upload.js"
-import authenticateUser from "../middleware/userAuth.js"
 
 
-const productRouter = express.Router()
 
-productRouter.post("/addbooks",upload.single("image"),addBooks)
-productRouter.get("/allbooks",getAllBooks)
-productRouter.get("/bookdetails/:id",getBookDetails)
-productRouter.post("/searchbooks",searchBooks)
-productRouter.get("/pagination",pagination)
-productRouter.get("/categories",getCategories)
-productRouter.post("/removebooks/:id",removeBooks)
+const productRoute = express.Router()
 
-export default productRouter
+productRoute.post("/addbooks",upload.single("image"),addBooks)
+productRoute.get("/allbooks",getAllBooks)
+productRoute.get("/bookdetails/:id",getBookDetails)
+productRoute.post("/searchbooks",searchBooks)
+productRoute.get("/pagination",pagination)
+productRoute.get("/categories",getCategories)
+productRoute.post("/removebooks/:id",removeBooks)
+
+export default productRoute
