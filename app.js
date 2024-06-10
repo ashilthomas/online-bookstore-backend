@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: true,
+    origin: "https://online-bookstore-web.netlify.app/"
   })
 );
 
