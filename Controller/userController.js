@@ -59,12 +59,7 @@ const login = async (req, res) => {
         }
         const token = generateToken(email)
       
-        res.cookie("token", token, {
-          httpOnly: true, // This prevents the cookie from being accessed via JavaScript
-          secure: process.env.NODE_ENV === 'production', // Set to true if using HTTPS in production
-          sameSite: 'None', // Adjust as necessary (None, Lax, or Strict)
-          maxAge: 1000 * 60 * 60 * 24 // 1 day in milliseconds
-      });
+        res.cookie("token", token, { sameSite: 'none', secure: true});
 
      
 

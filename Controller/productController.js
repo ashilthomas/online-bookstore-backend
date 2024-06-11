@@ -100,7 +100,7 @@ const searchBooks = async (req,res)=>{
   
   const query = req.query.query;
 
-console.log(query);
+console.log(req.query.query);
 
   try {
     const books = await ProductModel.find({
