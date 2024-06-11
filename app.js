@@ -8,7 +8,7 @@ import cartRoute from "./Routes/cartRoute.js";
 import cookieParser from "cookie-parser";
 import paymentRouter from "./Routes/paymentRoutes.js";
 import orderRoute from "./Routes/ordersRoutes.js";
-import productRoute from "./Routes/ProductRoute.js";
+import productRoute from "./Routes/productRoute.js";
 
 const app = express();
 const port = 3003;
