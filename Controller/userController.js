@@ -59,7 +59,7 @@ const login = async (req, res) => {
         }
         const token = generateToken(email)
       
-        res.cookie("token", token, { sameSite: 'none', secure: true});
+        res.cookie("token", token, {  secure: false, httpOnly: true});
 
      
 
