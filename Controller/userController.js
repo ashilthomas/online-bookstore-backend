@@ -68,10 +68,11 @@ const login = async (req, res) => {
 
      
 
-        res.status(200).cookie("token", token,{   httpOnly: true,
-          secure: true, // set to true if your site is served over HTTPS
-          sameSite: 'None',}).json({ message: "Login successfully",user,token });
-        
+        res.status(200).cookie("token", token,{
+          httpOnly: true,
+          secure: true, 
+          sameSite: 'None'
+        }).json({ message: "Login successfully",user,token });
     } catch (error) {
         console.log(error);
         res.status(404).json({ success: false, message: error.message });
