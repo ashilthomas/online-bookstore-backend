@@ -47,7 +47,12 @@ const addUser = async(req,res)=>{
 }
 
 const login = async (req, res) => {
+
+   
+
     const { email, password } = req.body;
+
+ 
     try {
         const user = await UserModel.findOne({ email });
         if (!user) { // Corrected condition to check if user exists
@@ -59,11 +64,13 @@ const login = async (req, res) => {
         }
         const token = generateToken(email)
       
-        res.cookie("token", token, {  secure: false, httpOnly: true});
+      
 
      
 
-        res.status(200).json({ success: true, message: "Login successfully",user,token });
+        res.status(200).cookie("token", token,{   httpOnly: true,
+          secure: true, // set to true if your site is served over HTTPS
+          sameSite: 'None',}).json({ message: "Login successfully",user,token });
         
     } catch (error) {
         console.log(error);

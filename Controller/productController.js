@@ -99,6 +99,7 @@ const getBookDetails = async (req, res) => {
 const searchBooks = async (req,res)=>{
   
   const query = req.query.query;
+  
 
 console.log(req.query.query);
 

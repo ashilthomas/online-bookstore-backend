@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import { connectDB } from "./Config/db.js";
 import userRoute from "./Routes/userRoute.js";
-
 import path from "path";
 import cartRoute from "./Routes/cartRoute.js";
 import cookieParser from "cookie-parser";
@@ -20,6 +19,7 @@ app.use(express.json());
 app.use(express.static(path.join(dirname, "uploads")));
 
 app.use(cookieParser());
+
 app.use(
   cors({ 
     origin: true,
