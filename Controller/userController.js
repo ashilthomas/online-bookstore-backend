@@ -46,38 +46,34 @@ const addUser = async(req,res)=>{
   }
 }
 
+
 const login = async (req, res) => {
+  const { email, password } = req.body;
 
-   
-
-    const { email, password } = req.body;
-
- 
-    try {
-        const user = await UserModel.findOne({ email });
-        if (!user) { // Corrected condition to check if user exists
-            return res.json({ success: false, message: "User not found" });
-        }
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.json({ success: false, message: "Invalid credentials" });
-        }
-        const token = generateToken(email)
-      
-      
-
-     
-
-        res.status(200).cookie("token", token,{
-          httpOnly: true,
-          secure: true, 
-          sameSite: 'None'
-        }).json({ message: "Login successfully",user,token });
-    } catch (error) {
-        console.log(error);
-        res.status(404).json({ success: false, message: error.message });
+  try {
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
     }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.json({ success: false, message: "Invalid credentials" });
+    }
+
+    const token = generateToken(email);
+
+    res.status(200).cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'None',
+    }).json({ message: "Login successfully", user, token,isAuthenticated:true });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ success: false, message: error.message });
+  }
 };
+
 
 
 

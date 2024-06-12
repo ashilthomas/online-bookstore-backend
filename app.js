@@ -21,10 +21,9 @@ app.use(express.static(path.join(dirname, "uploads")));
 app.use(cookieParser());
 
 app.use(
-  cors({ 
+  cors({
     origin: "https://online-bookstore-web.netlify.app",
-    credentials: true
-   
+    credentials: true,
   })
 );
 
