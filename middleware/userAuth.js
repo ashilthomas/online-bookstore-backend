@@ -5,6 +5,7 @@ import "dotenv/config"
 
 function authenticateUser(req, res, next) {
   const token = req.cookies.token;
+  console.log(token);
  
 
   jwt.verify(token, process.env.SK, (err, user) => {
