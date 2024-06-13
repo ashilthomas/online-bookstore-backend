@@ -63,9 +63,9 @@ const login = async (req, res) => {
 
     const token = generateToken(email);
 
-    res.status(200).cookie("token", token,  {httpOnly: true, // Prevents client-side JavaScript access
-    maxAge: 3600000, // 1 hour (adjust as needed)
-    secure: process.env.NODE_ENV === 'production', // Set secure only in production
+    res.status(200).cookie("token", token,  {httpOnly: false, 
+   
+    secure: true,
     sameSite: 'lax'}).json({ success:true, message: "Login successfully", user, token,isAuthenticated:true });
   } catch (error) {
     console.log(error);
