@@ -65,7 +65,7 @@ const login = async (req, res) => {
 
     res.status(200).cookie("token", token,  {httpOnly: false, 
    
-    secure: true,
+    secure: false,
     sameSite: 'lax'}).json({ success:true, message: "Login successfully", user, token,isAuthenticated:true });
   } catch (error) {
     console.log(error);
