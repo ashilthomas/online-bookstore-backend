@@ -48,30 +48,37 @@ const addUser = async(req,res)=>{
 
 
 const login = async (req, res) => {
+
   const { email, password } = req.body;
 
   try {
     const user = await UserModel.findOne({ email });
     if (!user) {
-      return res.json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: "User not found" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.json({ success: false, message: "Invalid credentials" });
+      return res.status(401).json({ success: false, message: "Invalid credentials" });
     }
 
     const token = generateToken(email);
-
-    res.status(200).cookie("token", token,  {httpOnly: false, 
    
-    secure: false,
-    sameSite: 'lax'}).json({ success:true, message: "Login successfully", user, token,isAuthenticated:true });
+
+    res.status(200)
+    .cookie("token", token)
+    .json({ success: true, message: "Login successfully", user, token, isAuthenticated: true });
+   
+   
+    req.user = user;
+
+  
   } catch (error) {
     console.log(error);
-    res.status(404).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 
 
