@@ -71,11 +71,11 @@ const login = async (req, res) => {
       // path = where the cookie is valid
       path: "/",
       // domain = what domain the cookie is valid on
-       domain: "localhost",
+       domain: "http://localhost:5174",
       // secure = only send cookie over https
       secure: false,
       // sameSite = only send cookie if the request is coming from the same origin
-      sameSite: "lax",
+      SameSite :"none",
 
     })
     .json({ success: true, message: "Login successfully", user, token, isAuthenticated: true });
