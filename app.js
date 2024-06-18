@@ -21,10 +21,7 @@ app.use(express.static(path.join(dirname, "uploads")));
 app.use(cookieParser());
 
 app.use(
-  cors({
-    origin: true,
-    credentials: true, 
-  })
+  cors()
 );
 
 
