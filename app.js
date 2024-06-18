@@ -21,7 +21,10 @@ app.use(express.static(path.join(dirname, "uploads")));
 app.use(cookieParser());
 
 app.use(
-  cors()
+  cors({
+    origin:"http://localhost:5174",
+    credentials:true
+  })
 );
 
 
