@@ -66,8 +66,27 @@ const login = async (req, res) => {
    
 
     res.status(200)
-    .cookie("token", token)
+    .cookie("token", token,{
+      httpOnly: true,
+      // path = where the cookie is valid
+      path: "/",
+      // domain = what domain the cookie is valid on
+       domain: "localhost",
+      // secure = only send cookie over https
+      secure: false,
+      // sameSite = only send cookie if the request is coming from the same origin
+      sameSite: "lax",
+
+    })
     .json({ success: true, message: "Login successfully", user, token, isAuthenticated: true });
+
+
+
+
+
+
+
+
    
    
     req.user = user;
