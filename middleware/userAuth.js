@@ -4,7 +4,8 @@ import jwt from "jsonwebtoken";
 import "dotenv/config"
 
 function authenticateUser(req, res, next) {
-  const token = req.cookies.token;
+  // const token = req.cookies.token;
+  const token = req.headers.authorization;
   console.log(token);
  
 
