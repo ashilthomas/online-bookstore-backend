@@ -106,7 +106,7 @@ console.log(req.query.query);
   try {
     const books = await ProductModel.find({
       $or: [
-        { title: { $regex: query, $options: 'i' } }, // Case-insensitive search by title
+        { name: { $regex: query, $options: 'i' } }, // Case-insensitive search by title
         { author: { $regex: query, $options: 'i' } }, // Case-insensitive search by author
         { keywords: { $regex: query, $options: 'i' } } ,// Case-insensitive search by keywords
         { category: { $regex: query, $options: 'i' } } // Case-insensitive search by keywords
