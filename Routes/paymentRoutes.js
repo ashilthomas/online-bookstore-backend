@@ -47,21 +47,21 @@ paymentRouter.post("/verify",authenticateUser, async (req, res) => {
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature,productId} =
     req.body;
 
-  
+
 
   try {
     const sign = razorpay_order_id + "|" + razorpay_payment_id;
 
-   
+
     const expectedSign = crypto
-      .createHmac("sha256", process.env.RAZORPAY_SECRET || "s")
+      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
       .update(sign.toString())
       .digest("hex");
 
 
 
     const isAuthentic = expectedSign === razorpay_signature;
-  
+
 
     if (isAuthentic) {
       const payment = new paymentModel({
@@ -75,7 +75,11 @@ paymentRouter.post("/verify",authenticateUser, async (req, res) => {
       await payment.save();
 
       res.json({
-        message: "Payement Successfully",
+        message: "Payment Successfully",
+      });
+    } else {
+      res.status(400).json({
+        message: "Payment verification failed",
       });
     }
   } catch (error) {
